@@ -3,13 +3,7 @@ class Api::V1::PropertiesController < ApplicationController
 
   # GET /properties or /properties.json
   def index
-    # properties = Property.all
-    # render json: properties, status: 200
     properties = Property.all
-
-    # if property_params.present?
-    #   properties = properties.where(property_params)
-    # end
 
     render json: properties
   end

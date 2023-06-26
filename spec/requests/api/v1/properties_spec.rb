@@ -52,39 +52,6 @@ RSpec.describe 'api/v1/properties', type: :request do
         run_test!
       end
     end
-
-    # get('list and retrieve properties with filters') do
-    #   response(200, 'successful') do
-    #     parameter name: :property_type, in: :query, type: :string, description: 'Property Type'
-    #     parameter name: :num_of_bedrooms, in: :query, type: :integer, description: 'Number of Bedroom(s)'
-    #     parameter name: :num_of_sitting_rooms, in: :query, type: :integer, description: 'Number of Sitting Rooms(s)'
-    #     parameter name: :num_of_kitchens, in: :query, type: :integer, description: 'Number of Kitchen(s)'
-    #     parameter name: :num_of_bathrooms, in: :query, type: :integer, description: 'Number of Bathroom(s)'
-    #     parameter name: :num_of_toilets, in: :query, type: :integer, description: 'Number of Toilets(s)'
-    #     parameter name: :owner, in: :query, type: :string, description: 'Owner Name'
-    #     parameter name: :valid_from, in: :query, type: :string, description: 'Valid From'
-    #     parameter name: :valid_to, in: :query, type: :string, description: 'Valid To'
-
-    #     let(:property_type) { 'Apartment' }
-    #     let(:num_of_bedrooms) { '2' }
-    #     let(:num_of_sitting_rooms) { '1' }
-    #     let(:num_of_kitchens) { '1' }
-    #     let(:num_of_bathrooms) { '1' }
-    #     let(:num_of_toilets) { '1' }
-    #     let(:owner) { 'John' }
-    #     let(:valid_from) { '2022-10-02' }
-    #     let(:valid_to) { '2025-11-02' }
-
-    #     after do |example|
-    #       example.metadata[:response][:content] = {
-    #         'application/json' => {
-    #           example: JSON.parse(response.body, symbolize_names: true)
-    #         }
-    #       }
-    #     end
-    #     run_test!
-    #   end
-    # end
   end
 
   path '/api/v1/properties/{id}' do
