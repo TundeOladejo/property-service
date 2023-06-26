@@ -1,0 +1,170 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/properties":
+    get:
+      summary: list properties
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create property
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: string
+                property_type:
+                  type: string
+                num_of_bedrooms:
+                  type: integer
+                num_of_sitting_rooms:
+                  type: integer
+                num_of_kitchens:
+                  type: integer
+                num_of_bathrooms:
+                  type: integer
+                num_of_toilets:
+                  type: integer
+                owner:
+                  type: string
+                description:
+                  type: string
+                valid_from:
+                  type: string
+                valid_to:
+                  type: string
+              required:
+              - address
+              - property_type
+              - num_of_bedrooms
+              - num_of_sitting_rooms
+              - num_of_kitchens
+              - num_of_bathrooms
+              - num_of_toilets
+              - owner
+              - description
+              - valid_from
+              - valid_to
+  "/api/v1/properties/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: Property ID
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show property
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update property partially
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                num_of_bedrooms:
+                  type: integer
+                num_of_sitting_rooms:
+                  type: integer
+                num_of_kitchens:
+                  type: integer
+                num_of_bathrooms:
+                  type: integer
+                num_of_toilets:
+                  type: integer
+                valid_to:
+                  type: string
+              required:
+              - description
+              - num_of_bedrooms
+              - num_of_sitting_rooms
+              - num_of_kitchens
+              - num_of_bathrooms
+              - num_of_toilets
+              - valid_to
+    put:
+      summary: update property completely
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                num_of_bedrooms:
+                  type: integer
+                num_of_sitting_rooms:
+                  type: integer
+                num_of_kitchens:
+                  type: integer
+                num_of_bathrooms:
+                  type: integer
+                num_of_toilets:
+                  type: integer
+                valid_to:
+                  type: string
+              required:
+              - description
+              - num_of_bedrooms
+              - num_of_sitting_rooms
+              - num_of_kitchens
+              - num_of_bathrooms
+              - num_of_toilets
+              - valid_to
+  "/api/v1/properties/owner/{owner}":
+    parameters:
+    - name: owner
+      in: path
+      description: owner
+      required: true
+      schema:
+        type: string
+    get:
+      summary: owner property
+      responses:
+        '200':
+          description: successful
+  "/api/v1/properties/property_address/{property_address}":
+    parameters:
+    - name: property_address
+      in: path
+      description: property_address
+      required: true
+      schema:
+        type: string
+    get:
+      summary: property_address property
+      responses:
+        '200':
+          description: successful
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: 127.0.0.1:3000
