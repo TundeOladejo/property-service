@@ -1,18 +1,18 @@
 databases:
-  - name: property-service
-    databaseName: property-service-production
-    user: property-service
+  - name: property_service
+    databaseName: property_service_production
+    user: property_service
 
 services:
   - type: web
-    name: property-service
+    name: property_service
     runtime: ruby
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: property-service
+          name: property_service
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
