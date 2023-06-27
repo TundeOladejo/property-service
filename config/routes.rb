@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
   resources :properties
   get 'properties/owner/:owner', to: 'properties#owner'
+  get "properties/filter/:property", to: "properties#filter"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

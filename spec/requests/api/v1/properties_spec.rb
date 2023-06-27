@@ -4,7 +4,7 @@ RSpec.describe 'api/v1/properties', type: :request do
 
   path '/api/v1/properties' do
 
-    get('list properties') do
+    get('List all available properties') do
       response(200, 'successful') do
 
         after do |example|
@@ -18,7 +18,7 @@ RSpec.describe 'api/v1/properties', type: :request do
       end
     end
 
-    post('create property') do
+    post('Add/create a new property') do
       response(200, 'successful') do
         consumes 'application/json'
         parameter name: :property, in: :body, schema: {
@@ -58,7 +58,7 @@ RSpec.describe 'api/v1/properties', type: :request do
     # You'll want to customize the parameter types...
     parameter name: 'id', in: :path, type: :string, description: 'Property ID'
 
-    get('show property') do
+    get('Retrieve a single property using property id') do
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -77,7 +77,7 @@ RSpec.describe 'api/v1/properties', type: :request do
   path '/api/v1/properties/{id}' do
     parameter name: 'id', in: :path, type: :string, description: 'Property ID'
 
-    patch('update property partially') do
+    patch('Update a property partially') do
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -121,7 +121,7 @@ RSpec.describe 'api/v1/properties', type: :request do
       end
     end
 
-    put('update property completely') do
+    put('Update a property completely') do
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -170,7 +170,7 @@ RSpec.describe 'api/v1/properties', type: :request do
     # You'll want to customize the parameter types...
     parameter name: 'owner', in: :path, type: :string, description: 'owner'
 
-    get('owner property') do
+    get('Retrieve multiple properties for a given owner') do
       response(200, 'successful') do
         let(:owner) { '123' }
 
@@ -187,10 +187,9 @@ RSpec.describe 'api/v1/properties', type: :request do
   end
 
   path '/api/v1/properties/property_address/{property_address}' do
-    # You'll want to customize the parameter types...
     parameter name: 'property_address', in: :path, type: :string, description: 'property_address'
 
-    get('property_address property') do
+    get('Find a property by address') do
       response(200, 'successful') do
         let(:property_address) { '123' }
 
@@ -206,7 +205,7 @@ RSpec.describe 'api/v1/properties', type: :request do
     end
   end
 
-  path '/api/v1/properties/filter' do
+  path '/api/v1/properties/filter/{property}' do
     parameter name: :owner, in: :query, type: :string, description: "Owner of the property"
     parameter name: :property_type, in: :query, type: :string, description: "Type of the property"
     parameter name: :num_of_bedrooms, in: :query, type: :integer, description: "Number of bedrooms"
@@ -216,8 +215,10 @@ RSpec.describe 'api/v1/properties', type: :request do
     parameter name: :num_of_toilets, in: :query, type: :integer, description: "Number of toilets"
     parameter name: :valid_to, in: :query, type: :string, format: :date, description: "Validity date of the property"
 
-    get('filter property') do
+
+    get('Retrieve multiple properties using additional filters') do
       response(200, 'successful') do
+        let(:property) { '123' }
 
         after do |example|
           example.metadata[:response][:content] = {

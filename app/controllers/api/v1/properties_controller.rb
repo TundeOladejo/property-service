@@ -86,7 +86,7 @@ class Api::V1::PropertiesController < ApplicationController
     end
   end
 
-  # GET /api/v1/properties/filter/?
+  # GET /api/v1/properties/filter/{property}?
   def filter
     properties = Property.where("owner = :owner OR property_type = :property_type OR
       num_of_bedrooms = :num_of_bedrooms OR num_of_sitting_rooms = :num_of_sitting_rooms OR
