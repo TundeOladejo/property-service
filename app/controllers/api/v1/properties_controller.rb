@@ -12,7 +12,7 @@ class Api::V1::PropertiesController < ApplicationController
   def show
     property = Property.where(id: params[:id])
 
-    if property
+    if property.present?
       render json: property, status: 200
     else
       render json: { error: "Property not found" }, status: 404
@@ -23,7 +23,7 @@ class Api::V1::PropertiesController < ApplicationController
   def owner
     properties = Property.where(owner: params[:owner])
 
-    if properties
+    if properties.present?
       render json: properties, status: 200
     else
       render json: { error: "No record found" }, status: 404
@@ -34,7 +34,7 @@ class Api::V1::PropertiesController < ApplicationController
   def property_address
     property = Property.where(address: params[:address])
 
-    if property
+    if property.present?
       render json: property
     else
       render json: { error: 'Property address not found' }, status: 404
