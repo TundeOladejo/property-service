@@ -6,12 +6,12 @@ info:
 paths:
   "/api/v1/properties":
     get:
-      summary: list properties
+      summary: List all available properties
       responses:
         '200':
           description: successful
     post:
-      summary: create property
+      summary: Add/create a new property
       parameters: []
       responses:
         '200':
@@ -65,12 +65,12 @@ paths:
       schema:
         type: string
     get:
-      summary: show property
+      summary: Retrieve a single property using property id
       responses:
         '200':
           description: successful
     patch:
-      summary: update property partially
+      summary: Update a property partially
       parameters: []
       responses:
         '200':
@@ -104,7 +104,7 @@ paths:
               - num_of_toilets
               - valid_to
     put:
-      summary: update property completely
+      summary: Update a property completely
       parameters: []
       responses:
         '200':
@@ -146,7 +146,7 @@ paths:
       schema:
         type: string
     get:
-      summary: owner property
+      summary: Retrieve multiple properties for a given owner
       responses:
         '200':
           description: successful
@@ -159,11 +159,11 @@ paths:
       schema:
         type: string
     get:
-      summary: property_address property
+      summary: Find a property by address
       responses:
         '200':
           description: successful
-  "/api/v1/properties/filter":
+  "/api/v1/properties/filter/{property}":
     parameters:
     - name: owner
       in: query
@@ -207,7 +207,7 @@ paths:
       schema:
         type: string
     get:
-      summary: filter property
+      summary: Retrieve multiple properties using additional filters
       responses:
         '200':
           description: successful
