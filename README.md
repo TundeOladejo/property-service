@@ -1,4 +1,4 @@
-# Property Sservice Api
+# Property Service Api
 
 ## Prerequisites
 
