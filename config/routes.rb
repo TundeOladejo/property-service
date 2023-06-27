@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       resources :properties, only:[:index, :show, :create, :update]
       get 'properties/owner/:owner', to: 'properties#owner'
       get 'properties/property_address/:property_address', to: 'properties#property_address'
-      get 'properties/filter', to: 'properties#filter'
+      get "properties/filter/:property", to: "properties#filter"
     end
   end
   resources :properties
