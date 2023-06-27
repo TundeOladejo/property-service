@@ -205,5 +205,29 @@ RSpec.describe 'api/v1/properties', type: :request do
       end
     end
   end
-end
 
+  path '/api/v1/properties/filter' do
+    parameter name: :owner, in: :query, type: :string, description: "Owner of the property"
+    parameter name: :property_type, in: :query, type: :string, description: "Type of the property"
+    parameter name: :num_of_bedrooms, in: :query, type: :integer, description: "Number of bedrooms"
+    parameter name: :num_of_sitting_rooms, in: :query, type: :integer, description: "Number of sitting rooms"
+    parameter name: :num_of_kitchens, in: :query, type: :integer, description: "Number of kitchens"
+    parameter name: :num_of_bathrooms, in: :query, type: :integer, description: "Number of bathrooms"
+    parameter name: :num_of_toilets, in: :query, type: :integer, description: "Number of toilets"
+    parameter name: :valid_to, in: :query, type: :string, format: :date, description: "Validity date of the property"
+
+    get('filter property') do
+      response(200, 'successful') do
+
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
+        end
+        run_test!
+      end
+    end
+  end
+end

@@ -22,7 +22,12 @@ class Api::V1::PropertiesController < ApplicationController
   # GET multiple owner properties /properties/owner/:owner
   def owner
     properties = Property.where(owner: params[:owner])
-    render json: properties
+
+    if properties
+      render json: properties, status: 200
+    else
+      render json: { error: "No record found" }
+    end
   end
 
   # GET /api/v1/properties/address/:address
@@ -32,7 +37,7 @@ class Api::V1::PropertiesController < ApplicationController
     if property
       render json: property
     else
-      render json: { error: 'Property not found' }, status: :not_found
+      render json: { error: 'Property address not found' }, status: :not_found
     end
   end
 
@@ -78,6 +83,24 @@ class Api::V1::PropertiesController < ApplicationController
       render json: property, status: 200
     else
       render json: { error: 'Property not found' }
+    end
+  end
+
+  # GET /api/v1/properties/filter/?
+  def filter
+    properties = Property.where("owner = :owner OR property_type = :property_type OR
+      num_of_bedrooms = :num_of_bedrooms OR num_of_sitting_rooms = :num_of_sitting_rooms OR
+      num_of_kitchens = :num_of_kitchens OR num_of_bathrooms = :num_of_bathrooms OR
+      num_of_toilets = :num_of_toilets OR valid_to = :valid_to",
+                                owner: params[:owner], property_type: params[:property_type],
+                                num_of_bedrooms: params[:num_of_bedrooms], num_of_sitting_rooms: params[:num_of_sitting_rooms],
+                                num_of_kitchens: params[:num_of_kitchens], num_of_bathrooms: params[:num_of_bathrooms],
+                                num_of_toilets: params[:num_of_toilets], valid_to: params[:valid_to])
+
+    if properties.present?
+      render json: properties, status: 200
+    else
+      render json: { error: "No records found" }, status: 404
     end
   end
 

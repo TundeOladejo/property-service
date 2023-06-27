@@ -3,16 +3,10 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   namespace :api, defaults:{ format: :json } do
     namespace :v1 do
-      # get 'properties/index'
-      # get 'properties/show'
-      # get 'properties/create'
-      # get 'properties/update'
-      # get 'properties/destroy'
-      # get 'properties/index'
-      # get 'properties/show'
       resources :properties, only:[:index, :show, :create, :update]
       get 'properties/owner/:owner', to: 'properties#owner'
       get 'properties/property_address/:property_address', to: 'properties#property_address'
+      get 'properties/filter', to: 'properties#filter'
     end
   end
   resources :properties

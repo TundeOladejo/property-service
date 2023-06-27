@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.1
 info:
-  title: API V1
+  title: PROPERTIES API V1
   version: v1
 paths:
   "/api/v1/properties":
@@ -160,6 +160,54 @@ paths:
         type: string
     get:
       summary: property_address property
+      responses:
+        '200':
+          description: successful
+  "/api/v1/properties/filter":
+    parameters:
+    - name: owner
+      in: query
+      description: Owner of the property
+      schema:
+        type: string
+    - name: property_type
+      in: query
+      description: Type of the property
+      schema:
+        type: string
+    - name: num_of_bedrooms
+      in: query
+      description: Number of bedrooms
+      schema:
+        type: integer
+    - name: num_of_sitting_rooms
+      in: query
+      description: Number of sitting rooms
+      schema:
+        type: integer
+    - name: num_of_kitchens
+      in: query
+      description: Number of kitchens
+      schema:
+        type: integer
+    - name: num_of_bathrooms
+      in: query
+      description: Number of bathrooms
+      schema:
+        type: integer
+    - name: num_of_toilets
+      in: query
+      description: Number of toilets
+      schema:
+        type: integer
+    - name: valid_to
+      in: query
+      format: date
+      description: Validity date of the property
+      schema:
+        type: string
+    get:
+      summary: filter property
       responses:
         '200':
           description: successful
