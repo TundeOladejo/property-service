@@ -1,24 +1,63 @@
-# README
+# Property Sservice Api
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Prerequisites
 
-Things you may want to cover:
+Make sure you have the following software installed on your machine:
 
-* Ruby version
+- Ruby (version X.X.X)
+- Ruby on Rails (version X.X.X)
+- Bundler
+- PostgreSQL
 
-* System dependencies
+## Project setup
+Clone this repo
 
-* Configuration
+```
+git clone https://github.com/TundeOladejo/property-service.git
+```
+or
 
-* Database creation
+```
+git clone https://github.com/TundeOladejo/property-service.git
+```
 
-* Database initialization
+cd into project directory and check your ruby version:
+```
+ruby -v
+```
 
-* How to run the test suite
+### Install the required gems using Bundler:
+Using Bundle
+```
+bundle
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Set up the PostgreSQL database:
+```
+rails db:create
+rails db:migrate
+rails db:seed
+```
 
-* Deployment instructions
+### Start the Rails server:
+```
+rails server
+```
 
-* ...
+### Additional Configuration
+
+Modify the database configuration in config/database.yml to match your PostgreSQL credentials.
+Modify the spec/swagger_helper.rb and swagger/v1/swagger.yaml files to match your localhost listening port
+Customize the project settings, such as routes, views, and models, based on your requirements.
+
+### Testing
+To run the project's test suite, use the following command:
+```
+bundle exec rspec
+```
+
+### Customize configuration
+See [Configuration Reference](https://guides.rubyonrails.org/).
+
+## Credits
+- Babatunde Oladejo [tundeoladejo@outlook.com](mailto:tundeoladejo@outlook.com)
