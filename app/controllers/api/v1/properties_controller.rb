@@ -15,7 +15,7 @@ class Api::V1::PropertiesController < ApplicationController
     if property
       render json: property, status: 200
     else
-      render json: { error: "Property not found" }
+      render json: { error: "Property not found" }, status: 404
     end
   end
 
@@ -26,7 +26,7 @@ class Api::V1::PropertiesController < ApplicationController
     if properties
       render json: properties, status: 200
     else
-      render json: { error: "No record found" }
+      render json: { error: "No record found" }, status: 404
     end
   end
 
@@ -37,7 +37,7 @@ class Api::V1::PropertiesController < ApplicationController
     if property
       render json: property
     else
-      render json: { error: 'Property address not found' }, status: :not_found
+      render json: { error: 'Property address not found' }, status: 404
     end
   end
 
