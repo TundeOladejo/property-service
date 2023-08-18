@@ -1,13 +1,6 @@
 class Api::V1::PropertiesController < ApplicationController
   require 'rest-client'
 
-  # GET /properties or /properties.json
-  def index
-    properties = Property.all
-
-    render json: properties
-  end
-
   # GET /properties/1 or /properties/1.json
   def show
     property = Property.where(id: params[:id])
@@ -49,19 +42,19 @@ class Api::V1::PropertiesController < ApplicationController
     query = property_params['address']
     api_url = 'https://api.opencagedata.com/geocode/v1/json'
 
-    url = api_url + '?' + 'key=' + api_key + '&q=' + query + '&pretty=1' + '&no_annotations=1'
+    url = "#{api_url}?key=#{api_key}&q=#{query}&pretty=1&no_annotations=1"
 
     response = RestClient.get(url)
     data = JSON.parse(response.body)
     results = data['results']
 
-    if results.empty?
+    if results.length < 1
       render json: {status: "failed", message: "The address is invalid"}, status: :not_found
     else
       if property.save
         render json: property, status: 200
       else
-        render json: { errors: "Property not saved" }, status:403
+        render json: { errors: property.errors.full_messages }, status:403
       end
     end
   end
@@ -102,9 +95,6 @@ class Api::V1::PropertiesController < ApplicationController
     else
       render json: { error: "No records found" }, status: 404
     end
-  end
-
-  def destroy
   end
 
   private

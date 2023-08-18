@@ -1,19 +1,22 @@
 class Property < ApplicationRecord
-  def validate_address
-    require 'opencage/geocoder'
+  validates :address, :property_type, :num_of_bedrooms, :num_of_sitting_rooms,
+    :num_of_kitchens, :num_of_bathrooms, :num_of_toilets, :owner, :description,
+    :valid_from, :valid_to, presence: true
 
-    return unless address_changed?
+  validates :num_of_bedrooms, :num_of_sitting_rooms,
+    :num_of_kitchens, :num_of_bathrooms, :num_of_toilets,
+    numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-    geocoder = OpenCage::Geocoder.new(api_key: '65cff62cf6164d9ca7dfccd17caa34f4')
-    results = geocoder.geocode(address)
+  validates :owner, :property_type, format: { with: /\A[a-zA-Z\s]+\z/, message: "only allows letters and spaces" }
+  validates :address, format: { with: /\A[a-zA-Z0-9\s]+\z/, message: "only allows letters, numbers, and spaces" }
 
-    p results.first.address
+  validates :valid_from, :valid_to, format: { with: /\A\d{4}-\d{2}-\d{2}\z/, message: "should be in the format yyyy-mm-dd" }
 
-    if results.empty?
-      errors.add(:address, 'is invalid')
-    else
-      self.latitude = results.first.latitude
-      self.longitude = results.first.longitude
+  validate :valid_to_not_less_than_valid_from
+
+  def valid_to_not_less_than_valid_from
+    if valid_to.present? && valid_from.present? && valid_to < valid_from
+      errors.add(:valid_to, "must be greater than or equal to Valid from")
     end
   end
 end

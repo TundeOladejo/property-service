@@ -4,20 +4,6 @@ RSpec.describe 'api/v1/properties', type: :request do
 
   path '/api/v1/properties' do
 
-    get('List all available properties') do
-      response(200, 'successful') do
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
     post('Add/create a new property') do
       response(200, 'successful') do
         consumes 'application/json'
@@ -56,7 +42,7 @@ RSpec.describe 'api/v1/properties', type: :request do
 
   path '/api/v1/properties/{id}' do
     # You'll want to customize the parameter types...
-    parameter name: 'id', in: :path, type: :string, description: 'Property ID'
+    parameter name: 'id', in: :path, type: :integer, description: 'Property ID'
 
     get('Retrieve a single property using property id') do
       response(200, 'successful') do
@@ -75,7 +61,7 @@ RSpec.describe 'api/v1/properties', type: :request do
   end
 
   path '/api/v1/properties/{id}' do
-    parameter name: 'id', in: :path, type: :string, description: 'Property ID'
+    parameter name: 'id', in: :path, type: :integer, description: 'Property ID'
 
     patch('Update a property partially') do
       response(200, 'successful') do
@@ -167,7 +153,6 @@ RSpec.describe 'api/v1/properties', type: :request do
   end
 
   path '/api/v1/properties/owner/{owner}' do
-    # You'll want to customize the parameter types...
     parameter name: 'owner', in: :path, type: :string, description: 'owner'
 
     get('Retrieve multiple properties for a given owner') do

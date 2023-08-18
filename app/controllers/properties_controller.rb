@@ -1,18 +1,6 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: %i[ show update destroy ]
 
-  # GET /properties
-  def index
-    @properties = Property.all
-
-    render json: @properties
-  end
-
-  # GET /properties/1
-  def show
-    render json: @property
-  end
-
   # POST /properties
   def create
     @property = Property.new(property_params)
@@ -31,11 +19,6 @@ class PropertiesController < ApplicationController
     else
       render json: @property.errors, status: :unprocessable_entity
     end
-  end
-
-  # DELETE /properties/1
-  def destroy
-    @property.destroy
   end
 
   private
